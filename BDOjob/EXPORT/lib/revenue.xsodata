@@ -1,0 +1,5 @@
+service {
+    "Revenue_total" as "Revenue"
+	keys generate local "ID"
+	aggregates always;
+}

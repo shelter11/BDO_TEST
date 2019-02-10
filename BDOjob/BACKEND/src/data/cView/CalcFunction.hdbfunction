@@ -1,0 +1,18 @@
+FUNCTION "CalcFunction"( )
+       RETURNS TABLE (
+       	"BUKRS" VARCHAR(4),
+       	"MONTH" VARCHAR(2),
+       	"REVENUE" DECIMAL(15,2),
+       	"REVENUE_TOTAL"DECIMAL(15,2)
+       )
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+    RETURN
+       SELECT 
+        "BUKRS",
+        "MONTH",
+        "REVENUE",
+        sum("REVENUE") OVER (PARTITION BY "BUKRS") AS "REVENUE_TOTAL"
+    FROM "REVENUE";
+END;

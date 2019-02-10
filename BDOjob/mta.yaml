@@ -1,0 +1,34 @@
+ID: BDOjob
+_schema-version: '2.1'
+version: 0.0.1
+modules:
+  - name: BACKEND
+    type: hdb
+    path: BACKEND
+    requires:
+      - name: hdi_BACKEND
+
+  
+
+
+  - name: EXPORT
+    type: nodejs
+    path: EXPORT
+    requires:
+      - name: BACKEND
+      - name: hdi_BACKEND
+    provides:
+     - name: EXPORT_api
+       properties:
+          url: ${default-url}
+
+
+  
+
+resources:
+  - name: hdi_BACKEND
+    properties:
+      hdi-container-name: '${service-name}'
+    type: com.sap.xs.hdi-container
+    parameters:
+      service-name: backend
